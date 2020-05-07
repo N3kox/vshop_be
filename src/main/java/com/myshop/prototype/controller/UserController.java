@@ -57,15 +57,35 @@ public class UserController extends UserImpl {
         return nu;
     }
 
-    //修改用户信息(fe)
-    @PutMapping("/update")
+    //更新名称
+    @PutMapping("/updateName")
     @ResponseBody
-    public User updateUserInfo(@Param("uid") Long uid, @Param("name")String name, @Param("pwd") String pwd){
+    public User updateUserInfo(@Param("uid") Long uid, @Param("name")String name){
+        if(uid == null)
+            return null;
         User cur = getUserInfo(uid);
         if(name != null) cur.setName(name);
-        if(pwd != null) cur.setPwd(md5.originMD5(pwd));
         return updateUser(cur);
     }
+
+    //更新密码
+    @PutMapping("/updatePwd")
+    @ResponseBody
+    public User updateUserInfo(@Param("uid") Long uid, @Param("pwd") String pwd, @Param("newpwd") String newpwd) {
+//        System.out.println("uid : "+ uid);
+//        System.out.println("pwd : " + pwd);
+//        System.out.println("curpwd : " + newpwd);
+        if (uid == null || pwd == null || newpwd == null)
+            return null;
+        User cur = getUserInfo(uid);
+//        System.out.println("curPwd : "+md5.originMD5(pwd));
+//        System.out.println("newPwd : "+cur.getPwd());
+        if (md5.originMD5(pwd).equals(cur.getPwd())) {
+            cur.setPwd(md5.originMD5(newpwd));
+        }
+        return updateUser(cur);
+    }
+
 
 
     //删除用户信息
