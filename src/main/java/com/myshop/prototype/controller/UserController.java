@@ -104,4 +104,14 @@ public class UserController extends UserImpl {
     }
 
 
+    @PutMapping("/pwdforce")
+    @ResponseBody
+    public User pwdForceUpdate(@Param("uid") Long uid, @Param("newpwd") String newpwd){
+        if(uid == null || newpwd == null) return null;
+        User cur = getUserInfo(uid);
+        if(cur == null) return null;
+        cur.setPwd(md5.originMD5(newpwd));
+        return updateUser(cur);
+    }
+
 }
