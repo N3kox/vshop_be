@@ -1,6 +1,6 @@
 # vshop_fe
 
-## Setup
+### Setup
 
 - Download and wait maven to init
 - Default port : 8080
@@ -12,3 +12,6 @@
 - IDEA
 - Tomcat
 - MySQL
+
+### FrontEnd
+- [vshop_fe](https://github.com/N3kox/vshop_fe)
