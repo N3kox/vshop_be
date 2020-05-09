@@ -156,22 +156,17 @@ public class ItemController extends ItemImpl {
             System.out.println("#Error : no param setting");
             return null;
         }
+
         Long iid = Long.valueOf(map.get("iid").toString());
         /*
         for(String key : map.keySet()){
             System.out.println("Key : "+key+"\tValue : "+map.get(key));
         }
-        System.out.println("iid:"+iid);
-        System.out.println("name:"+map.get("name"));
-        System.out.println("uid:"+map.get("uid"));
-        System.out.println("quantity:"+map.get("quantity"));
-        System.out.println("desc:"+map.get("description"));
          */
 
         String path = ResourceUtils.getURL("classpath:").getPath();
         if(file != null){
-            String newIid = String.valueOf(iid+1);
-            String newName = newIid+".jpg";
+            String newName = iid+".jpg";
             System.out.println(path);
             File uploadFile = new File(path+"/static/"+newName);
             file.transferTo(uploadFile);
