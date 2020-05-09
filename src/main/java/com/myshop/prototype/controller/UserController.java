@@ -86,6 +86,17 @@ public class UserController extends UserImpl {
         return updateUser(cur);
     }
 
+    //更新level
+    @PutMapping("/updateLevel")
+    @ResponseBody
+    public User updateUserLevel(@Param("uid") Long uid, @Param("level") Integer level){
+        if(uid == null || level == null)
+            return null;
+        User nu = getUserInfo(uid);
+        nu.setLevel(level);
+        return updateUser(nu);
+    }
+
 
 
     //删除用户信息
