@@ -12,4 +12,5 @@ public interface ItemService {
     List<Item> selectAll();
     Optional<Item> selectItem(Long iid);
     List<Item> getByVerify(Integer verify);
+    List<Item> getByUid(Long uid);
 }

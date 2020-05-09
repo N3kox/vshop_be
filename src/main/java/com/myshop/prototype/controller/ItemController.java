@@ -87,6 +87,14 @@ public class ItemController extends ItemImpl {
         return item.orElse(null);
     }
 
+    @GetMapping("/mine")
+    @ResponseBody
+    public List<Item> getMyItems(@Param("uid") Long uid){
+        if(uid == null)
+            return null;
+        return getByUid(uid);
+    }
+
 
     //加入新商品
     @PutMapping("/update")
@@ -130,17 +138,22 @@ public class ItemController extends ItemImpl {
     }
 
     //立即购买
-    @PutMapping("buynow")
+    @PutMapping("minusQuan")
     @ResponseBody
-    public String buyItemNow(@Param("iid") Long iid, @Param("uid") Long uid, @Param("quantity") Integer quantity){
-        if(iid == null || uid == null || quantity == null)
-            return ItemControllerError("null param(s)");
+    public Item buyItemNow(@Param("iid") Long iid, @Param("quantity") Integer quantity){
+        if(iid == null || quantity == null){
+            System.out.println(ItemControllerError("null param(s)"));
+            return null;
+        }
         //注意quantity二次检查防止异步刷新导致购买数量出错
         Item ni = getItemInfo(iid);
-        if(ni.getQuantity() < quantity)
-            return ItemControllerError("stock less than demand");
-        // TODO:购买修改Item与Cart
-        return "ok";
+        if(ni.getQuantity() < quantity){
+            System.out.println(ItemControllerError("stock less than demand"));
+            return null;
+        }
+        ni.setQuantity(ni.getQuantity() - quantity);
+        //购买修改Item与Cart动作在其他请求实现
+        return updateItem(ni);
     }
 
 

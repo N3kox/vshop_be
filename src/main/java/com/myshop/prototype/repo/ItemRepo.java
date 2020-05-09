@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ItemRepo extends JpaRepository<Item, Long> {
     public List<Item> getByVerify(Integer verify);
-
+    public List<Item> getByUid(Long uid);
 }

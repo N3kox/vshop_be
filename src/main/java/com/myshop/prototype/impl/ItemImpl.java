@@ -40,6 +40,11 @@ public class ItemImpl implements ItemService {
     }
 
     @Override
+    public List<Item> getByUid(Long uid) {
+        return itemRepo.getByUid(uid);
+    }
+
+    @Override
     public Optional<Item> selectItem(Long iid) {
         return itemRepo.findById(iid);
     }
