@@ -177,11 +177,20 @@ public class ItemController extends ItemImpl {
         }
          */
 
-        String path = ResourceUtils.getURL("classpath:").getPath();
+        //5.14.2020 : server fix
+        //String path = ResourceUtils.getURL("classpath:").getPath();
+
+        String path = ResourceUtils.getURL("file:/home/ubuntu/xzn/static/").getPath();
+        //String path="/home/ubuntu/xzn/static/";
+        //System.out.println("#controller:path:"+path);
         if(file != null){
             String newName = iid+".jpg";
-            System.out.println(path);
-            File uploadFile = new File(path+"/static/"+newName);
+            //System.out.println(path);
+
+            //5.14.2020 : server fix
+            //File uploadFile = new File(path+"/static/"+newName);
+
+            File uploadFile = new File(path+newName);
             file.transferTo(uploadFile);
             System.out.println("goodUpload");
             return "goodUpload";
