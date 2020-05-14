@@ -13,5 +13,10 @@
 - Tomcat
 - MySQL
 
+### Branches
+
+- master : local dev
+- serverBranch : server fit (image storage changes)
+
 ### FrontEnd
 - [vshop_fe](https://github.com/N3kox/vshop_fe)
